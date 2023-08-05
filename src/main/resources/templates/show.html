@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users page</title>
+</head>
+<body>
+<div>Пользватель (id = <span th:text="${user.getId()}"></span>)</div>
+<br/>
+<div>
+    <span th:text="'Имя: ' + ${user.getFirstName()} + ', фамилия: ' + ${user.getLastName()} + ', возраст: ' + ${user.getAge()} + ' лет'"></span>
+</div>
+<br/>
+<hr>
+<br/>
+<form method="get" th:action="@{/users/{id}/edit (id=${user.getId()})}" th:object="${user}">
+    <input type="submit" value="Изменить данные пользователя">
+</form>
+<br/>
+<form th:method="delete" th:action="@{/users/{id} (id=${user.getId()})}">
+    <input type="submit" value="Удалить пользователя">
+</form>
+
+
+
+</body>
+</html>
