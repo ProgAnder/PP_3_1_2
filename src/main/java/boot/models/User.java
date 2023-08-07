@@ -1,10 +1,8 @@
 package boot.models;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
+import java.util.Objects;
 
-@Component
 @Entity
 @Table(name = "users")
 public class User {
@@ -21,12 +19,12 @@ public class User {
     private String lastName;
 
     @Column(name = "age")
-    private Integer age;
+    private Byte age;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, Integer age) {
+    public User(String firstName, String lastName, Byte age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -56,12 +54,25 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Integer getAge() {
+    public Byte getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(Byte age) {
         this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(age, user.age);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, age);
     }
 
     @Override

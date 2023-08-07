@@ -2,8 +2,7 @@ package boot.services;
 
 
 import boot.models.User;
-import boot.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import boot.repositories.UserRepositoryImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,10 +12,9 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository repository;
+    private final UserRepositoryImpl repository;
 
-    @Autowired
-    public UserServiceImpl(UserRepository repository) {
+    public UserServiceImpl(UserRepositoryImpl repository) {
         this.repository = repository;
     }
 
@@ -27,20 +25,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Long id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id);
     }
 
     @Override
     @Transactional
     public void save(User user) {
-        repository.save(user);
+        repository.add(user);
     }
 
     @Override
     @Transactional
     public void update(Long id, User user) {
-        user.setId(id);
-        repository.save(user);
+        repository.editUser(user);
     }
 
     @Override
