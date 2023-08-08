@@ -2,6 +2,7 @@ package boot.controllers;
 
 import boot.models.User;
 import boot.services.UserService;
+import boot.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,16 +12,15 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
-    @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
 
 
     @GetMapping()
-    public String carsView() {
+    public String helloView() {
         return "hellopage";
     }
 
@@ -53,9 +53,9 @@ public class UserController {
         return "edit";
     }
 
-    @PatchMapping("/users/{id}")
+    @PatchMapping("/users")
     public String updateUser(User user) {
-        userService.update(user.getId(), user);
+        userService.update(user);
         return "redirect:/users/" + user.getId();
     }
 

@@ -26,7 +26,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findById(long id) {
-                return entityManager.find(User.class, id);
+        return entityManager.find(User.class, id);
     }
 
     @Override
@@ -40,30 +40,4 @@ public class UserRepositoryImpl implements UserRepository {
         entityManager.merge(user);
 
     }
-
-
-   
-
-
-
-
-
-
-
-
-
-
-    /*  
-    
- *
- public void add(User user);
-    public List<User> getList();
-    public User getUser(long id);
-    public void deleteUser(long id);
-    public void editUser(User user);
-
-
- *
- * */
-
 }
